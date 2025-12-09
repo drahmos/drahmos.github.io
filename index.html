@@ -1,7 +1,353 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAIL | Responsible AI Lab - Prof. Alex Vance</title>
-    <script src="https://cdn.tailwindcss.com">
+    <title>RAIL - Responsible AI Lab</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        #hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Sections General */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 1rem auto 0;
+        }
+
+        /* About */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Research Pillars */
+        #research-pillars {
+            background-color: var(--light-bg);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Publications */
+        .publication-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .pub-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-member p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        #contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+        }
+
+        #contact h2 {
+            color: var(--white);
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">RAIL</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research-pillars">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1>Responsible AI Lab</h1>
+        <p>Building reliable, fair, and interpretable artificial intelligence systems for a better future.</p>
+        <a href="#research-pillars" class="btn">Explore Our Research</a>
+    </section>
+
+    <section id="about">
+        <h2>Our Mission</h2>
+        <p>
+            The Responsible AI Lab (RAIL) is dedicated to bridging the gap between high-performance machine learning models and robust, equitable real-world applications. We focus on the sociotechnical implications of AI, ensuring that as systems become more autonomous, they remain aligned with human values and safety standards.
+        </p>
+    </section>
+
+    <section id="research-pillars">
+        <h2>Research Pillars</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Reliability & Robustness</h3>
+                <p>Developing systems that perform safely under distributional shift and adversarial conditions. We move beyond standard benchmarks to test AI in dynamic, unpredictable environments.</p>
+            </div>
+            <div class="card">
+                <h3>Fairness & Ethics</h3>
+                <p>Investigating algorithmic bias and developing mitigation strategies. We work on mathematical definitions of fairness that translate effectively to policy and social contexts.</p>
+            </div>
+            <div class="card">
+                <h3>Interpretability</h3>
+                <p>Opening the "black box" of deep learning. Our work focuses on post-hoc explanation methods and inherently interpretable model architectures for high-stakes decision making.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications">
+        <h2>Recent Publications</h2>
+        
+        <div class="publication-item">
+            <div class="pub-title">Towards Causal Fairness in Graph Neural Networks</div>
+            <div class="pub-meta">J. Doe, A. Smith, <strong>Prof. Name</strong>. <em>NeurIPS 2024</em>.</div>
+        </div>
+
+        <div class="publication-item">
+            <div class="pub-title">Evaluating Robustness in Large Language Models for Medical Advice</div>
+            <div class="pub-meta">R. Chen, <strong>Prof. Name</strong>, S. Gupta. <em>ICML 2024</em>.</div>
+        </div>
+
+        <div class="publication-item">
+            <div class="pub-title">A Survey of Interpretability Techniques for Autonomous Systems</div>
+            <div class="pub-meta">L. Wilson, <strong>Prof. Name</strong>. <em>Journal of Artificial Intelligence Research (JAIR)</em>.</div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2>Meet the Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="/api/placeholder/150/150" alt="Professor Photo">
+                <h3>Professor Name</h3>
+                <p>Principal Investigator</p>
+            </div>
+            
+            <div class="team-member">
+                <img src="/api/placeholder/150/150" alt="Student Photo">
+                <h3>Alex Johnson</h3>
+                <p>PhD Candidate</p>
+            </div>
+
+            <div class="team-member">
+                <img src="/api/placeholder/150/150" alt="Student Photo">
+                <h3>Sarah Lee</h3>
+                <p>PhD Candidate</p>
+            </div>
+             <div class="team-member">
+                <img src="/api/placeholder/150/150" alt="Researcher Photo">
+                <h3>Dr. Michael Chen</h3>
+                <p>Postdoctoral Researcher</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <p class="contact-info">
+            Interested in collaborating or joining the lab?<br><br>
+            Email us at: <a href="mailto:contact@rail-lab.edu">contact@rail-lab.edu</a><br>
+            Follow us on Twitter: <a href="#">@RAIL_Lab</a>
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Responsible AI Lab. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
